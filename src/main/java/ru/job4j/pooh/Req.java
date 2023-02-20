@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Req {
 
+    public final static String GET = "GET";
+    public final static String POST = "POST";
     private final String httpRequestType;
     private final String poohMode;
     private final String sourceName;

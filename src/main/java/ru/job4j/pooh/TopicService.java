@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import static ru.job4j.pooh.Req.GET;
+import static ru.job4j.pooh.Req.POST;
+
 public class TopicService implements Service {
 
     private final Map<String, ConcurrentHashMap<String, ConcurrentLinkedQueue<String>>> topics = new ConcurrentHashMap<>();
@@ -14,11 +17,11 @@ public class TopicService implements Service {
         String reqType = req.httpRequestType();
         String reqParam = req.getParam();
 
-        if ("POST".equals(reqType) && topics.get(sourceName) == null) {
+        if (POST.equals(reqType) && topics.get(sourceName) == null) {
             rsl = new Resp("Топик с названием " + sourceName + " - недоступен", "Статус 204");
         }
 
-        if ("POST".equals(reqType) && topics.get(sourceName) != null) {
+        if (POST.equals(reqType) && topics.get(sourceName) != null) {
             ConcurrentHashMap<String, ConcurrentLinkedQueue<String>> topic = topics.get(sourceName);
             for (ConcurrentLinkedQueue<String> queue : topic.values()) {
                 queue.add(reqParam);
@@ -26,7 +29,7 @@ public class TopicService implements Service {
             rsl = new Resp(reqParam, "Статус 200");
         }
 
-        if ("GET".equals(reqType)) {
+        if (GET.equals(reqType)) {
             ConcurrentHashMap<String, ConcurrentLinkedQueue<String>> topic = topics.get(sourceName);
             String text;
             if (topic == null) {
