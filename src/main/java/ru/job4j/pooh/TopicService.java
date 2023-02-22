@@ -6,6 +6,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static ru.job4j.pooh.Req.GET;
 import static ru.job4j.pooh.Req.POST;
+import static ru.job4j.pooh.Resp.STATUS_200;
+import static ru.job4j.pooh.Resp.STATUS_204;
 
 public class TopicService implements Service {
 
@@ -18,7 +20,7 @@ public class TopicService implements Service {
         String reqParam = req.getParam();
 
         if (POST.equals(reqType) && topics.get(sourceName) == null) {
-            rsl = new Resp("Топик с названием " + sourceName + " - недоступен", "Статус 204");
+            rsl = new Resp("Топик с названием " + sourceName + " - недоступен", STATUS_204);
         }
 
         if (POST.equals(reqType) && topics.get(sourceName) != null) {
@@ -26,7 +28,7 @@ public class TopicService implements Service {
             for (ConcurrentLinkedQueue<String> queue : topic.values()) {
                 queue.add(reqParam);
             }
-            rsl = new Resp(reqParam, "Статус 200");
+            rsl = new Resp(reqParam, STATUS_200);
         }
 
         if (GET.equals(reqType)) {
@@ -44,7 +46,7 @@ public class TopicService implements Service {
                 ConcurrentLinkedQueue<String> concurrentLinkedQueue = topic.get(reqParam);
                 text = concurrentLinkedQueue.poll();
             }
-            rsl = new Resp(text, "Статус 200");
+            rsl = new Resp(text, STATUS_200);
         }
 
         return rsl;

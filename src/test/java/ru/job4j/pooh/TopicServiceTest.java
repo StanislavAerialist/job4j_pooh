@@ -47,7 +47,7 @@ public class TopicServiceTest {
                 new Req("GET", "topic", "weather", paramForSubscriber1)
         );
         assertThat(result.text(), is("Топик с названием weather - недоступен"));
-        assertThat(result.status(), is("Статус 204"));
+        assertThat(result.status(), is("204"));
         assertThat(result1.text(), is(""));
     }
 
@@ -82,12 +82,12 @@ public class TopicServiceTest {
                 new Req("GET", "topic", "weather2", paramForSubscriber1)
         );
         assertThat(result1.text(), is(paramForPublisher1));
-        assertThat(result1.status(), is("Статус 200"));
+        assertThat(result1.status(), is("200"));
         assertThat(result2.text(), is(paramForPublisher2));
-        assertThat(result2.status(), is("Статус 200"));
+        assertThat(result2.status(), is("200"));
         assertThat(result3.text(), is(paramForPublisher1));
-        assertThat(result3.status(), is("Статус 200"));
+        assertThat(result3.status(), is("200"));
         assertThat(result4.text(), is(paramForPublisher2));
-        assertThat(result4.status(), is("Статус 200"));
+        assertThat(result4.status(), is("200"));
     }
 }

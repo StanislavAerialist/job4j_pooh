@@ -20,7 +20,7 @@ public class QueueServiceTest {
                 new Req("GET", "queue", "weather", null)
         );
         assertThat(result.text(), is("temperature=18"));
-        assertThat(result.status(), is("Статус 200"));
+        assertThat(result.status(), is("200"));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class QueueServiceTest {
                 new Req("GET", "queue", "weather", null)
         );
         assertThat(result.text(), is("Очередь с именем weather - не существует или пуста"));
-        assertThat(result.status(), is("Статус 204"));
+        assertThat(result.status(), is("204"));
     }
 
     @Test
@@ -54,10 +54,10 @@ public class QueueServiceTest {
                 new Req("GET", "queue", "weather", null)
         );
         assertThat(result1.text(), is("temperature=18"));
-        assertThat(result1.status(), is("Статус 200"));
+        assertThat(result1.status(), is("200"));
         assertThat(result2.text(), is("temperature=-18"));
-        assertThat(result2.status(), is("Статус 200"));
+        assertThat(result2.status(), is("200"));
         assertThat(result3.text(), is("Очередь с именем weather - не существует или пуста"));
-        assertThat(result3.status(), is("Статус 204"));
+        assertThat(result3.status(), is("204"));
     }
 }
